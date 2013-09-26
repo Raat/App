@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>Web App</title>
-	<link href="static/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<header>
@@ -23,11 +23,12 @@
 			<p data-bind="description"></p>
 			 <section data-bind="items">
 			    <section>
-			      <p data-bind="score"></p>
-			      <p data-bind="team1"></p>
-			      <p data-bind="team1score"></p>
-			      <p data-bind="team2"></p>
-			      <p data-bind="team2score"></p>
+			      <p data-bind="score" class="row1"></p>
+			      <p data-bind="team1" class="row2"></p>
+			      <p data-bind="team1Score" class="row3"></p>
+			      <p data-bind="team2" class="row4"></p>
+			      <p data-bind="team2Score" class="row5"></p>
+			      <section class="end"></section>
 			    </section>
 			  </section>
 		</section>
@@ -36,13 +37,14 @@
 			<p data-bind="description"></p>
 			<section data-bind="items">
 				<section>
-					<p data-bind="team"></p>
-					<p data-bind="Win"></p>
-					<p data-bind="Lost"></p>
-					<p data-bind="Sw"></p>
-					<p data-bind="Sl"></p>
-					<p data-bind="Pw"></p>
-					<p data-bind="Pl"></p>
+					<p data-bind="team" class="row1"></p>
+					<p data-bind="Win" class="row2"></p>
+					<p data-bind="Lost" class="row3"></p>
+					<p data-bind="Sw" class="row4"></p>
+					<p data-bind="Sl" class="row5"></p>
+					<p data-bind="Pw" class="row6"></p>
+					<p data-bind="Pl" class="row7"></p>
+					<section class="end"></section>
 				</section>
 			</section>
 		</section>
@@ -51,11 +53,12 @@
 			<p data-bind="description"></p>
 			<section data-bind="items">
 				<section>
-					<p data-bind="date"></p>
-					<p data-bind="team1"></p>
-					<p data-bind="team1score"></p>
-					<p data-bind="team2"></p>
-					<p data-bind="team2score"></p>
+					<p data-bind="date" class="row1"></p>
+					<p data-bind="team1" class="row2"></p>
+					<p data-bind="team1Score" class="row3"></p>
+					<p data-bind="team2" class="row4"></p>
+					<p data-bind="team2Score" class="row5"></p>
+					<section class="end"></section>
 				</section>
 			</section>	
 		</section>

@@ -1,7 +1,15 @@
-var APP = APP || {};
+//qwery is een selector enging. Werkt ook met multi-selects (div, p) en css3 atribute selectors.
 
-(function () {
-	// Data objecten
+//routie neemt een waarde die achter de hash staat en koppelt dit aan een functie.
+
+//transparancy is een template engine die objecten bind met elementen dmv id, classes en data-bind.
+
+//ready kijkt of alles geladen is en voert daarna iets uit.
+
+var APP = APP || {};// Namespace object
+
+(function () { // anonieme functie
+	// Data objecten voor de 3 sections
 	APP.page1 = {
 		title:'Game',
 		description:'Game pagina',
@@ -91,21 +99,22 @@ var APP = APP || {};
 		},
 
 		change: function () {
-            var route = window.location.hash.slice(2),
-                sections = qwery('section[data-route]'),
-                section = qwery('[data-route=' + route + ']')[0];  
+            var route = window.location.hash.slice(2),// slices alles na de hash (0) is met de hash.
+                sections = qwery('section[data-route]'), //section array data-route
+                section = qwery('[data-route=' + route + ']')[0]; // data route is wat na de hash komt
+             console.log(route);// wat doet location.hash.slice precies  
 
             // Show active section, hide all other
             if (section) {
-            	for (var i=0; i < sections.length; i++){
+            	for (var i=0; i < sections.length; i++){ // ga door de array sections heen en haal alle active classes weg.
             		sections[i].classList.remove('active');
             	}
-            	section.classList.add('active');
+            	section.classList.add('active');//Voeg active toe aan de geselecteerde section
             }
 
             // Default route
             if (!route) {
-            	sections[0].classList.add('active');
+            	sections[0].classList.add('active');//de eerste section is standaart active
             }
 
 		}
@@ -114,8 +123,8 @@ var APP = APP || {};
 	// Page
 	APP.page = {
 		page1: function () {
-			Transparency.render(qwery('[data-route=page1]')[0], APP.page1);
-			APP.router.change();
+			Transparency.render(qwery('[data-route=page1]')[0], APP.page1);//Transparancy libary bind section page1 aan data app.page1
+			APP.router.change();//ga naar deze methode.
 		},
 
 		page2: function () {
@@ -130,6 +139,7 @@ var APP = APP || {};
 	}
 	// DOM ready
 	domready(function () {
+		console.log("Ready")
 		// Kickstart application
 		APP.controller.init();
 	});
