@@ -6,10 +6,10 @@
 	<link href="css/reset.css" rel="stylesheet" type="text/css" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body id="body">
 	<section id="loader"></section>
 	<header>
-		<h1>Web App</h1>
+		<h1>Windmill Windup</h1>
 		<nav>
 			<ul class="menu">
 				<li><a href="#/home">Home</a></li>
@@ -66,13 +66,17 @@
 				</article>
 			</section>
 
-		<section data-route="game">
-
+		<section data-route="game" class="home">
+			<section data-list="headerGame">
+				<header id="home" data-bind="poolNameGame">
+					
+				</header>
+			</section>
 					<section class="head">
-						<p class="row25">Gespeeld op</p>
-						<p class="row25">Team 1</p>
+						<p class="row25">Date</p>
+						<p class="row25">Team</p>
 						<p class="row25">Score</p>
-						<p class="row25">Team 2</p>
+						<p class="row25">Team</p>
 						<section class="clear"></section>
 					</section>
 				<section data-list="game">
@@ -87,7 +91,11 @@
 				<section class="clear"></section>
 		</section>
 
-		<section data-route="updateGame">
+		<section data-route="updateGame" class="home">
+				
+				<header id="home">
+					Update Score
+				</header>
 			<form id="game">
 				<section class="left">
 				<p data-bind="team_1"></p>
@@ -103,12 +111,17 @@
 
 		</section>
 
-		<section data-route="ranking">
+		<section data-route="ranking" class="home">
+			<section data-list="headerRanking">
+				<header id="home" data-bind="poolNameRanking">
+					
+				</header>
+			</section>
 				<section class="head">
 						<p class="row25">Team</p>
-						<p class="row25">Gespeeld</p>
-						<p class="row25">Gewonnen</p>
-						<p class="row25">Verloren</p>
+						<p class="row25">Plays</p>
+						<p class="row25">Win</p>
+						<p class="row25">Lost</p>
 						<section class="clear"></section>
 				</section>
 				<section data-list="ranking">
@@ -133,7 +146,6 @@
 	<script src="js/lib/qwery.min.js" type="text/javascript"></script>
 	<script src="js/lib/transparancy.min.js" type="text/javascript"></script>
 	<script src="js/lib/quo.js" type="text/javascript"></script>
-	<script src="js/lib/reqwest.js" type="text/javascript"></script>
 	<script src="js/lib/hook.min.js" type="text/javascript"></script>
 
 	<!-- Application -->

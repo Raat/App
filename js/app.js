@@ -14,8 +14,6 @@ var APP = APP || {};// Namespace object
 
 	'use strict';
 
-	APP.game = [];
-
 	APP.directives = {
 
 				teamName:{
@@ -103,6 +101,18 @@ var APP = APP || {};// Namespace object
 						href: function(params){
 							return "javascript:APP.post.updateGame(" + this.id + ");";
 						}	
+				},
+
+				poolNameGame:{
+							text: function(params){
+							return params.text = "POOL: " + this.pool.name;
+						}
+				},
+
+				poolNameRanking:{
+							text: function(params){
+							return params.text = "POOL: " + this.name;
+						}
 				}
 
 
@@ -144,6 +154,13 @@ var APP = APP || {};// Namespace object
 			    	APP.page.home();
 			    }
 			});
+
+			//	Hook.js pull-to-refresh
+			$('#body').hook({reloadPage: true});
+			
+			$$('#body').doubleTap(function(){
+				location.reload();
+			});		
 		},
 
 		change: function () {
@@ -169,14 +186,10 @@ var APP = APP || {};// Namespace object
 	};
 
 	// Page
-	APP.page = {
-		
+	APP.page = {	
 		home: function () {
-		
-		APP.router.change();
-		APP.loader.stop();
-
-
+			APP.router.change();
+			APP.loader.stop();
 		},
 
 		game: function () {
@@ -188,11 +201,12 @@ var APP = APP || {};// Namespace object
 				    async: true,
 				    success: function(response) {	
 				    	console.log(response.objects[0]);
-				    	APP.game = response.objects;
+				    	//APP.game = response.objects;
 				    	
-				    	console.log("game:", APP.game);
+				    	//console.log("game:", APP.game);
 				    	
-				    	Transparency.render(qwery('[data-list=game]')[0], APP.game, APP.directives);
+				    	Transparency.render(qwery('[data-list=game]')[0], response.objects, APP.directives);
+						Transparency.render(qwery('[data-list=headerGame]')[0], response.objects[0], APP.directives);
 						APP.router.change();//ga naar deze methode.
 						APP.loader.stop();
 				    },
@@ -209,11 +223,11 @@ var APP = APP || {};// Namespace object
 				    async: true,
 				    success: function(response) {	
 				
-				    	APP.game = response;
+				    	//APP.game = response;
 				    	
-				    	console.log("gameinfo:", APP.game)
+				    	//console.log("gameinfo:", APP.game)
 
-				    	Transparency.render(qwery('[data-route=updateGame]')[0], APP.game, APP.directives);
+				    	Transparency.render(qwery('[data-route=updateGame]')[0], response, APP.directives);
 
 				    	var section = qwery('[data-route=updateGame]')[0];
 				    	var gameSection = qwery('[data-route=game]')[0];
@@ -226,7 +240,6 @@ var APP = APP || {};// Namespace object
 				    },
 				    error: function(xhr, type) { console.log("fail") }
 				});
-			APP.loader.stop();
 		},
 
 		ranking: function(){
@@ -239,11 +252,11 @@ var APP = APP || {};// Namespace object
 				    success: function(response) {	
 
 				    	console.log(response.objects[0]);
-				    	APP.game = response.objects[0].standings;
+				    	//APP.game = response.objects[0].standings;
 				    	
-				    	console.log("game:", APP.game);
-
-				    	Transparency.render(qwery('[data-list=ranking]')[0], APP.game, APP.directives);
+				    	//console.log("game:", APP.game);
+				    	Transparency.render(qwery('[data-list=headerRanking]')[0], response.objects[0], APP.directives);
+				    	Transparency.render(qwery('[data-list=ranking]')[0], response.objects[0].standings, APP.directives);
 						APP.router.change();//ga naar deze methode.
 						APP.loader.stop();
 				    },
@@ -254,36 +267,50 @@ var APP = APP || {};// Namespace object
 
 	APP.post = { 
 
-			updateGame: function( gameId ) {
+			updateGame: function(gameID) {
 
-			var	team1Score = document.getElementById('team1Score').value;
-			var team2Score = document.getElementById('team2Score').value;
-			var isFinal = 'False';
+                        var team1Score = document.getElementById('team1Score').value;
+                        var team2Score = document.getElementById('team2Score').value;
+                        var isFinal = "True";
 
-			APP.loader.start();
 
-			reqwest({
+                        var type = 'POST',
+                                url = 'https://api.leaguevine.com/v1/game_scores/',
+                                postData = JSON.stringify({
+                                        game_id: gameID,
+                                        team_1_score: team1Score,
+                                        team_2_score: team2Score,
+                                        is_final: isFinal
+                                });
 
-				url: 'https://api.leaguevine.com/v1/game_scores/',
-				type: 'json',
-				method: 'post',
-				contentType: 'application/json',
-				headers: {
-					'Authorization': 'bearer e3fe416a88'
-				},
-				processData: false,
-				data: JSON.stringify({
-					game_id: gameId,
-					team_1_score: team1Score,
-					team_2_score: team2Score,
-					is_final: isFinal
-				})
+                        // Create request
+                        var xhr = new XMLHttpRequest();
 
-			}).always(APP.loader.stop);
+                        // Open request
+                        xhr.open(type, url, true);
 
-			window.location.href = "#/game";
+                        // Set request headers, including authorisation
+                        xhr.setRequestHeader('Content-type', 'application/json');
+                        xhr.setRequestHeader('Authorization', 'bearer ec4ff493f7');
 
-		}
+                        // Send request
+                        xhr.send(postData);
+
+                        //        Re-render game page (server too slow to update from server after writing)
+                        //        App.GameController.renderGame(gameID);
+
+                        //        Update animation
+
+                        APP.loader.start();      
+
+                        window.setInterval( function(){
+
+                       APP.loader.stop();      
+                       window.location.href = "#/game";      
+
+                        }, 2000);
+
+                }
 
 
     };
@@ -302,7 +329,6 @@ var APP = APP || {};// Namespace object
 		}
 
 	};
-
 
 	// DOM ready
 	domready(function () {

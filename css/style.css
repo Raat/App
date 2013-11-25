@@ -40,6 +40,11 @@ article> section.active{
 	clear:both;
 }
 
+header{
+	background:#0b3242;
+	color:#F0F2EB;
+}
+
 nav{
 	width:100%;
 	background:#26ADE4;
@@ -81,17 +86,20 @@ nav{
 	height:100%;
 }
 
-.home{
-	padding:3%;
-}
-
 .home header{
-	padding:2% 0%;
+	padding:2% 2%;
 	font-size: 24px;
+	background:#F0F2EB;
+	color:#26ADE4;
+	border-bottom:1px solid #26ADE4;
 }
 
 .home h2{
 	padding-top:2%;
+}
+
+#main-article{
+padding:3%;
 }
 
 header{
