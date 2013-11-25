@@ -6,68 +6,106 @@
 
 //ready kijkt of alles geladen is en voert daarna iets uit.
 
+
 var APP = APP || {};// Namespace object
 
+
 (function () { // anonieme functie
-	// Data objecten voor de 3 sections
-	APP.page1 = {
-		title:'Game',
-		description:'Game pagina',
-		items: [
-			{ score: "1", team1: "Boomsquad", team1Score: "1", team2: "Burning Snow", team2Score: "0"},
-			{ score: "2", team1: "Boomsquad", team1Score: "2", team2: "Burning Snow", team2Score: "0"},
-		    { score: "3", team1: "Boomsquad", team1Score: "2", team2: "Burning Snow", team2Score: "1"},
-		    { score: "4", team1: "Boomsquad", team1Score: "2", team2: "Burning Snow", team2Score: "2"},
-		    { score: "5", team1: "Boomsquad", team1Score: "3", team2: "Burning Snow", team2Score: "2"},
-		    { score: "6", team1: "Boomsquad", team1Score: "4", team2: "Burning Snow", team2Score: "2"},
-		    { score: "7", team1: "Boomsquad", team1Score: "5", team2: "Burning Snow", team2Score: "2"},
-		    { score: "8", team1: "Boomsquad", team1Score: "5", team2: "Burning Snow", team2Score: "3"},
-		    { score: "9", team1: "Boomsquad", team1Score: "6", team2: "Burning Snow", team2Score: "3"},
-		    { score: "10", team1: "Boomsquad", team1Score: "7", team2: "Burning Snow", team2Score: "3"},
-		    { score: "11", team1: "Boomsquad", team1Score: "7", team2: "Burning Snow", team2Score: "4"},
-		    { score: "12", team1: "Boomsquad", team1Score: "8", team2: "Burning Snow", team2Score: "4"},
-		    { score: "13", team1: "Boomsquad", team1Score: "8", team2: "Burning Snow", team2Score: "5"},
-		    { score: "14", team1: "Boomsquad", team1Score: "8", team2: "Burning Snow", team2Score: "6"},
-		    { score: "15", team1: "Boomsquad", team1Score: "9", team2: "Burning Snow", team2Score: "6"},
-		    { score: "16", team1: "Boomsquad", team1Score: "9", team2: "Burning Snow", team2Score: "7"},
-		    { score: "17", team1: "Boomsquad", team1Score: "10", team2: "Burning Snow", team2Score: "7"},
-		    { score: "18", team1: "Boomsquad", team1Score: "11", team2: "Burning Snow", team2Score: "7"},
-		    { score: "19", team1: "Boomsquad", team1Score: "12", team2: "Burning Snow", team2Score: "7"},
-		    { score: "20", team1: "Boomsquad", team1Score: "13", team2: "Burning Snow", team2Score: "7"},
-		    { score: "21", team1: "Boomsquad", team1Score: "14", team2: "Burning Snow", team2Score: "7"},
-		    { score: "22", team1: "Boomsquad", team1Score: "14", team2: "Burning Snow", team2Score: "8"},
-		    { score: "23", team1: "Boomsquad", team1Score: "15", team2: "Burning Snow", team2Score: "8"}
-		]
-	};
 
-	APP.page2 = {
-		title:'Ranking',
-		description:'Ranking pagina',
-		items: [
-			{ team: "Chasing", Win: "2", Lost: "2", Sw: "7", Sl: "9", Pw: "35", Pl: "39"},
-		    { team: "Boomsquad", Win: "2", Lost: "2", Sw: "9", Sl: "8", Pw: "36", Pl: "34"},
-		    { team: "Burning Snow", Win: "3", Lost: "1", Sw: "11", Sl: "4", Pw: "36", Pl: "23"},
-		    { team: "Beast Amsterdam", Win: "2", Lost: "2", Sw: "6", Sl: "8", Pw: "30", Pl: "34"},
-		    { team: "Amsterdam Money Gang", Win: "1", Lost: "3", Sw: "6", Sl: "10", Pw: "30", Pl: "37"}
+	'use strict';
 
-		]
-	};
+	APP.game = [];
 
-	APP.page3 = {
-		title:'Schedule',
-		description:'Schedule pagina',
-		items: [
-			{ date: "Monday, 9:00am", team1: "Chasing", team1Score: "13", team2: "Amsterdam Money Gang", team2Score: "9"},
-		    { date: "Monday, 9:00am", team1: "Boomsquad", team1Score: "15", team2: "Beast Amsterdam", team2Score: "11"},
-		    { date: "Monday, 10:00am", team1: "Beast Amsterdam", team1Score: "14", team2: "Amsterdam Money Gang", team2Score: "12"},
-		    { date: "Monday, 10:00am", team1: "Chasing", team1Score: "5", team2: "Burning Snow", team2Score: "15"},
-		    { date: "Monday, 11:00am", team1: "Boomsquad", team1Score: "11", team2: "Amsterdam Money Gang", team2Score: "15"},    
-		    { date: "Monday, 11:00am", team1: "Burning Snow", team1Score: "15", team2: "Beast Amsterdam", team2Score: "6"},
-		    { date: "Monday, 12:00pm", team1: "Chasing", team1Score: "8", team2: "Beast Amsterdam", team2Score: "15"},
-		    { date: "Monday, 12:00pm", team1: "Boomsquad", team1Score: "15", team2: "Burning Snow", team2Score: "8"},
-		    { date: "Monday, 1:00pm", team1: "Chasing", team1Score: "15", team2: "Boomsquad", team2Score: "14"},
-		    { date: "Monday, 1:00pm", team1: "Burning Snow", team1Score: "15", team2: "Amsterdam Money Gang", team2Score: "11"}
-		]
+	APP.directives = {
+
+				teamName:{
+					text: function(params){
+						return params.text = this.team.name;
+					}
+				},
+
+				win:{
+					text: function(params){
+						return params.text = this.wins;
+					}
+				},
+
+				lost:{
+					text: function(params){
+						return params.text = this.losses;
+					}
+				},
+
+				plays:{
+					text: function(params){
+						return params.text = this.games_played;
+					}
+				},
+
+				team_1:
+						{
+						text: function(params){
+						return params.text = this.team_1.name;
+						}
+					},
+							
+				team_2: {
+						text: function(params){
+						return params.text = this.team_2.name;
+						}
+					},
+
+				score:
+						{
+						text: function(params){
+						return params.text = this.team_1_score + " - " + this.team_2_score;
+						}
+					},
+
+				score_1:
+						{
+							value: function(params){
+							return this.team_1_score;
+							}
+					},
+
+				score_2:
+						{
+							value: function(params){
+							return this.team_2_score;
+							}
+					},
+
+				date:
+					{
+						text: function(params){
+							var date = new Date(this.start_time);
+							var day_names = new Array("Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag");
+							var curr_day = date.getDay();
+							console.log(day_names + date);
+							var minutes = date.getMinutes();
+							//minutes = "01"
+							if (minutes < 2) {
+								minutes = "0" + date.getMinutes();
+							}
+							return day_names[curr_day] + ",	" + date.getHours() + " : " + minutes;
+						}
+					},
+
+				game_id:{
+						href: function(params){
+							return "#/game/" + this.id;
+						}
+				},
+
+				game_update:{
+							
+						href: function(params){
+							return "javascript:APP.post.updateGame(" + this.id + ");";
+						}	
+				}
+
+
 	};
 
 	// Controller Init
@@ -82,18 +120,28 @@ var APP = APP || {};// Namespace object
 	APP.router = {
 		init: function () {
 	  		routie({
-			    '/page1': function() {
-			    	APP.page.page1();
+			    '/home': function() {
+			    	APP.loader.start();
+			    	APP.page.home();
 				},
-			    '/page2': function() {
-			    	APP.page.page2();
+			    '/game': function() {
+			    	APP.loader.start();
+			    	APP.page.game();
 			    },
 
-			    '/page3': function() {
-			    	APP.page.page3();
+			    '/game/:id': function( gameId ) {
+			    	APP.loader.start();
+					APP.page.updateGame( gameId );
+				},
+
+			    '/ranking': function() {
+			    	APP.loader.start();
+			    	APP.page.ranking();
 			    },
+
 			    '*': function() {
-			    	APP.page.page1();
+			    	APP.loader.start();
+			    	APP.page.home();
 			    }
 			});
 		},
@@ -122,21 +170,140 @@ var APP = APP || {};// Namespace object
 
 	// Page
 	APP.page = {
-		page1: function () {
-			Transparency.render(qwery('[data-route=page1]')[0], APP.page1);//Transparancy libary bind section page1 aan data app.page1
-			APP.router.change();//ga naar deze methode.
+		
+		home: function () {
+		
+		APP.router.change();
+		APP.loader.stop();
+
+
 		},
 
-		page2: function () {
-			Transparency.render(qwery('[data-route=page2]')[0], APP.page2);
-			APP.router.change();
+		game: function () {
+			$$.ajax({ //quo.js
+				    type: 'GET', // defaults to 'GET'
+				    url: 'https://api.leaguevine.com/v1/games/?pool_id=19222&access_token=acfa228f8c',
+				    //data: {user: 'soyjavi', pass: 'twitter'},
+				    dataType: 'json', //'json', 'xml', 'html', or 'text'
+				    async: true,
+				    success: function(response) {	
+				    	console.log(response.objects[0]);
+				    	APP.game = response.objects;
+				    	
+				    	console.log("game:", APP.game);
+				    	
+				    	Transparency.render(qwery('[data-list=game]')[0], APP.game, APP.directives);
+						APP.router.change();//ga naar deze methode.
+						APP.loader.stop();
+				    },
+				    error: function(xhr, type) { console.log("fail") }
+				});
 		},
 
-		page3: function () {
-			Transparency.render(qwery('[data-route=page3]')[0], APP.page3);
-			APP.router.change();
+		updateGame: function (gameId) {
+			$$.ajax({ //quo.js
+				    type: 'GET', // defaults to 'GET'
+				    url: 'https://api.leaguevine.com/v1/games/' + gameId + '/',
+				    //data: {user: 'soyjavi', pass: 'twitter'},
+				    dataType: 'json', //'json', 'xml', 'html', or 'text'
+				    async: true,
+				    success: function(response) {	
+				
+				    	APP.game = response;
+				    	
+				    	console.log("gameinfo:", APP.game)
+
+				    	Transparency.render(qwery('[data-route=updateGame]')[0], APP.game, APP.directives);
+
+				    	var section = qwery('[data-route=updateGame]')[0];
+				    	var gameSection = qwery('[data-route=game]')[0];
+
+				    	section.classList.add('active');
+
+				    	gameSection.classList.remove('active');
+				    	APP.loader.stop();
+
+				    },
+				    error: function(xhr, type) { console.log("fail") }
+				});
+			APP.loader.stop();
+		},
+
+		ranking: function(){
+			$$.ajax({ //quo.js
+				    type: 'GET', // defaults to 'GET'
+				    url: 'https://api.leaguevine.com/v1/pools/?pool_ids=%5B19222%5D&access_token=acfa228f8c',
+				    //data: {user: 'soyjavi', pass: 'twitter'},
+				    dataType: 'json', //'json', 'xml', 'html', or 'text'
+				    async: true,
+				    success: function(response) {	
+
+				    	console.log(response.objects[0]);
+				    	APP.game = response.objects[0].standings;
+				    	
+				    	console.log("game:", APP.game);
+
+				    	Transparency.render(qwery('[data-list=ranking]')[0], APP.game, APP.directives);
+						APP.router.change();//ga naar deze methode.
+						APP.loader.stop();
+				    },
+				    error: function(xhr, type) { console.log("fail") }
+				});
 		}
-	}
+	};
+
+	APP.post = { 
+
+			updateGame: function( gameId ) {
+
+			var	team1Score = document.getElementById('team1Score').value;
+			var team2Score = document.getElementById('team2Score').value;
+			var isFinal = 'False';
+
+			APP.loader.start();
+
+			reqwest({
+
+				url: 'https://api.leaguevine.com/v1/game_scores/',
+				type: 'json',
+				method: 'post',
+				contentType: 'application/json',
+				headers: {
+					'Authorization': 'bearer e3fe416a88'
+				},
+				processData: false,
+				data: JSON.stringify({
+					game_id: gameId,
+					team_1_score: team1Score,
+					team_2_score: team2Score,
+					is_final: isFinal
+				})
+
+			}).always(APP.loader.stop);
+
+			window.location.href = "#/game";
+
+		}
+
+
+    };
+
+    APP.loader = {
+    	start: function() {
+
+			document.getElementById('loader').classList.remove('noloader');
+
+		},
+
+		stop: function() {
+
+			document.getElementById('loader').classList.add('noloader');
+
+		}
+
+	};
+
+
 	// DOM ready
 	domready(function () {
 		console.log("Ready")

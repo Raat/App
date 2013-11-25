@@ -3,65 +3,128 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>Web App</title>
+	<link href="css/reset.css" rel="stylesheet" type="text/css" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<section id="loader"></section>
 	<header>
 		<h1>Web App</h1>
 		<nav>
-			<ul>
-				<li><a href="#/page1">Pagina 1</a></li>
-				<li><a href="#/page2">Pagina 2</a></li>
-				<li><a href="#/page3">Pagina 3</a></li>
+			<ul class="menu">
+				<li><a href="#/home">Home</a></li>
+				<li><a href="#/game">Game</a></li>
+				<li><a href="#/ranking">Ranking</a></li>
+				<section class="clear"></section>
 		    </ul>
 		</nav>
 	</header>
 
-	<article id="content" class="col">
-		<section data-route="page1" class="active">
-			<h1 data-bind="title"></h1>
-			<p data-bind="description"></p>
-			 <section data-bind="items">
-			    <section>
-			      <p data-bind="score" class="row1"></p>
-			      <p data-bind="team1" class="row2"></p>
-			      <p data-bind="team1Score" class="row3"></p>
-			      <p data-bind="team2" class="row4"></p>
-			      <p data-bind="team2Score" class="row5"></p>
-			      <section class="end"></section>
-			    </section>
-			  </section>
-		</section>
-		<section data-route="page2">
-			<h1 data-bind="title"></h1>
-			<p data-bind="description"></p>
-			<section data-bind="items">
-				<section>
-					<p data-bind="team" class="row1"></p>
-					<p data-bind="Win" class="row2"></p>
-					<p data-bind="Lost" class="row3"></p>
-					<p data-bind="Sw" class="row4"></p>
-					<p data-bind="Sl" class="row5"></p>
-					<p data-bind="Pw" class="row6"></p>
-					<p data-bind="Pl" class="row7"></p>
-					<section class="end"></section>
-				</section>
+	<article id="content">
+		<section data-route="home" class="active home">
+				<header id="home">
+					About Windmill Windup
+				</header>
+				<article id="main-article">
+					<p>
+						The Windmill Windup is a yearly ultimate frisbee tournament held in Amsterdam, comprised of three divisions of play (open, women&apos;s and mixed). The three day event is loaded with ultimate frisbee action and off the field antics, resulting in an unforgettable weekend of intense sport and constant fun.
+					</p>
+					
+					<h2>
+						7 rules of ultimate frisbee
+					</h2>
+					<p>
+						The game of Ultimate frisbee is played by the following rules:
+					</p>
+					<p>
+						<ol>
+							<li>7 players on the line</li>
+							<li>First team to 15 wins</li>
+							<li>Teams switch sides after each score</li>
+							<li>Half time once a team scores 8 goals</li>
+							<li>Players may not run with the disc</li>
+							<li>Players must pass the disc within 10 seconds</li>
+							<li>Games are self officiating</li>	
+						</ol>
+					</p>
+					
+					<h2>
+						Final ranking poule day
+					</h2>
+
+					<p>
+						Teams will play a round-robin in four pools. The best 2 teams of each pool play a bracket for the win. The final ranking of the pool are based on:
+					</p>
+
+					<ol>
+						<li>Total of games won</li>
+						<li>[if teams are equal] Result of games against eachother</li>
+						<li>[if teams are equal] Total of scored points - lost points</li>
+						<li>[if teams are equal] Flip a coin</li>
+					</ol>
+
+				</article>
 			</section>
-		</section>
-		<section data-route="page3">
-			<h1 data-bind="title"></h1>
-			<p data-bind="description"></p>
-			<section data-bind="items">
-				<section>
-					<p data-bind="date" class="row1"></p>
-					<p data-bind="team1" class="row2"></p>
-					<p data-bind="team1Score" class="row3"></p>
-					<p data-bind="team2" class="row4"></p>
-					<p data-bind="team2Score" class="row5"></p>
-					<section class="end"></section>
+
+		<section data-route="game">
+
+					<section class="head">
+						<p class="row25">Gespeeld op</p>
+						<p class="row25">Team 1</p>
+						<p class="row25">Score</p>
+						<p class="row25">Team 2</p>
+						<section class="clear"></section>
+					</section>
+				<section data-list="game">
+						<a href ="" class="game_id">
+						<p class="row25" data-bind="date"></p>
+						<p class="row25" data-bind="team_1"></p>
+						<p class="row25" data-bind="score"></p>
+						<p class="row25" data-bind="team_2"></p>
+						</a>
+						<section class="clear"></section>
 				</section>
-			</section>	
+				<section class="clear"></section>
 		</section>
+
+		<section data-route="updateGame">
+			<form id="game">
+				<section class="left">
+				<p data-bind="team_1"></p>
+				<input type="number" id="team1Score" data-bind="score_1" value="">
+				</section>
+				<section class="right">
+				<p data-bind="team_2"></p>
+				<input type="number" id="team2Score" data-bind="score_2" value="">
+				</section>
+				<section class="clear"></section>
+				<button class="submit"><a href="" data-bind="game_update">Submit</a></button>
+			</form>
+
+		</section>
+
+		<section data-route="ranking">
+				<section class="head">
+						<p class="row25">Team</p>
+						<p class="row25">Gespeeld</p>
+						<p class="row25">Gewonnen</p>
+						<p class="row25">Verloren</p>
+						<section class="clear"></section>
+				</section>
+				<section data-list="ranking">
+						<p class="row25" data-bind="teamName"></p>
+						<p class="row25" data-bind="plays"></p>
+						<p class="row25" data-bind="win"></p>
+						<p class="row25" data-bind="lost"></p>
+						<section class="clear"></section>
+				</section>
+				<section class="clear"></section>
+		</section>
+
+		<section data-route="bracket">
+			
+		</section>	
+
 	</article>
 
 	<!-- Libs -->
@@ -69,6 +132,9 @@
 	<script src="js/lib/ready.min.js" type="text/javascript"></script>
 	<script src="js/lib/qwery.min.js" type="text/javascript"></script>
 	<script src="js/lib/transparancy.min.js" type="text/javascript"></script>
+	<script src="js/lib/quo.js" type="text/javascript"></script>
+	<script src="js/lib/reqwest.js" type="text/javascript"></script>
+	<script src="js/lib/hook.min.js" type="text/javascript"></script>
 
 	<!-- Application -->
 	<script src="js/app.js"></script>

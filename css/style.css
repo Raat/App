@@ -3,133 +3,184 @@
 	box-sizing:border-box;
 }
 
-body {
-	font-size:100%;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-	font-weight: 300;
-	color:#333;
-	background-color: #fff;
-}
-h1 {
-	text-shadow: 1px 1px 1px #fff;
-	font-family: "Marker Felt";
-}
-p {
-
-}
 a {
-	font-weight:bold;
-	color:#0fa000;
-	-webkit-transition:all .5s ease;
+	display:block;
 }
-a:hover {
-	color:#ffb400;
-	background-color: #f4f4f4;
+
+a.hover{
+	background:white;
 }
-ul {
-	list-style:none;
-	margin:0;
-	padding:0;
+
+body{
+	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+	width:100%;
+	background:#F0F2EB;
 }
-	ul li {
 
-	}
-		ul li a {
-			display:block;
-			border-color:#333;
-			border-style:solid;
-			border-width:1px 0 0;
-			background-color: #f5f5f5;
-			line-height:2;
-			text-decoration: none;
-			padding:0 2%;
-		}
-		ul li:last-child a {
-			border-bottom-width:1px;
-		}
-
-		ul li a:hover {
-			background-color: #eee;
-		}
-
-/* header section */
-header {
-	position:relative;
-	padding:0 .5em;
+input{
+	width:80%;
+	height:55px;
 }
-	header img {
-		opacity:.3;
-		width:50px;
-		position:absolute;
-		top:-.8em;
-		-webkit-transition:all 1s ease;
-	}
-	header img:hover {
-		opacity:1;
-	}
-	header h1 {
-		font-family: "Marker Felt";
-		color:#000;
-		font-size: 1.6em;
-		margin-left:2.5em;
 
-	}
-
-/* Content section */
-article#content {
-	clear:left;
+button{
+	width:50%;
+	height:55px;
+	margin:1%;
 }
-	article > section {
-		display:none;
-	}
-	article > section.active {
-		display:block;
-	}
-	article h1 {
-		margin-bottom: .5em;
-	}
 
-	article ul {
-		list-style: none;
-		margin-bottom:3em;
-	}
-/* Aside */
-aside {
+article > section{
+	display:none;
+}
+
+article> section.active{
+	display:block;
+}
+
+.clear{
+	clear:both;
+}
+
+nav{
+	width:100%;
+	background:#26ADE4;
 	text-align: center;
 }
-	aside h1 {
-		font-size:1.2em
-	}
-	aside img {
-		margin-bottom:1em;
-	}
 
-/* Dead Simple Grid (c) 2012 Vladimir Agafonkin */
-
-.col {
-	padding: 0 .5em;
-}
-
-.row1, .row2, .row3, .row4, .row5, .row6, .row7{
-	float:left;
-	border:1px solid black;
-	width:180px;
-	height:50px;
-	padding:10px 0px 0px 10px;
-}
-
-.end{
+.menu{
 	width:100%;
-	float:left;
-}
-.row .row {
-	margin: 0 -.5em;
+	margin:0% 5%;
+
+
 }
 
-.row:before, .row:after {
-	content: "";
-	display: table;
+.menu li{
+	width:30%;
+	margin:auto;
+	float:left;
+	list-style: none;
 }
-.row:after {
-	clear: both;
+
+.menu li:hover{
+	background:#4DBCE9;
+
+}
+
+.menu a{
+	font-family: Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+	display:block;
+	width:100%;
+	height:100%;
+	color:#000;
+	line-height: 50px;
+	text-align: center;
+	text-decoration: none;
+}
+
+#content{
+	width:100%;
+	height:100%;
+}
+
+.home{
+	padding:3%;
+}
+
+.home header{
+	padding:2% 0%;
+	font-size: 24px;
+}
+
+.home h2{
+	padding-top:2%;
+}
+
+header{
+	width:100%
+}
+
+header h1{
+	margin:auto;
+	text-align: center;
+	font-size: 24px;
+	padding:3%;
+}
+
+#game{
+	width:80%;
+	margin:10%;
+}
+
+.left{
+	width:40%;
+	float:left;
+}
+.right{
+	width:40%;
+	float:left;
+}
+
+
+.row20{
+	float:left;
+	width:20%;
+	height:50px;
+	line-height: 50px;
+	border-right:1px solid black;
+	border-bottom:1px solid black;
+	padding-left:10px;
+	overflow:hidden;
+}
+
+.row25{
+	float:left;
+	width:25%;
+	height:50px;
+	line-height: 50px;
+	border-right:1px solid black;
+	border-bottom:1px solid black;
+	padding-left:10px;
+	overflow:hidden;
+}
+
+#loader {
+display:normal;
+height:60px;
+width:60px;
+margin:0px auto;
+position:absolute;
+top:50%;
+left:50%;
+-webkit-animation: rotation .6s infinite linear;
+-moz-animation: rotation .6s infinite linear;
+-o-animation: rotation .6s infinite linear;
+animation: rotation .6s infinite linear;
+border-left:6px solid rgba(0,174,239,.15);
+border-right:6px solid rgba(0,174,239,.15);
+border-bottom:6px solid rgba(0,174,239,.15);
+border-top:6px solid rgba(0,174,239,.8);
+border-radius:100%;
+}
+
+@-webkit-keyframes rotation {
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(359deg);}
+}
+
+@-moz-keyframes rotation {
+from {-moz-transform: rotate(0deg);}
+to {-moz-transform: rotate(359deg);}
+}
+
+@-o-keyframes rotation {
+from {-o-transform: rotate(0deg);}
+to {-o-transform: rotate(359deg);}
+}
+
+@keyframes rotation {
+from {transform: rotate(0deg);}
+to {transform: rotate(359deg);}
+}
+
+.noloader{
+display:none;
 }
