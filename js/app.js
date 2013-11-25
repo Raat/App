@@ -82,7 +82,6 @@ var APP = APP || {};// Namespace object
 							var curr_day = date.getDay();
 							console.log(day_names + date);
 							var minutes = date.getMinutes();
-							//minutes = "01"
 							if (minutes < 2) {
 								minutes = "0" + date.getMinutes();
 							}
@@ -156,8 +155,9 @@ var APP = APP || {};// Namespace object
 			});
 
 			//	Hook.js pull-to-refresh
-			$('#body').hook({reloadPage: true});
+			//$('#body').hook({reloadPage: true});
 			
+			//Quo mobile gesture
 			$$('#body').doubleTap(function(){
 				location.reload();
 			});		
@@ -200,11 +200,7 @@ var APP = APP || {};// Namespace object
 				    dataType: 'json', //'json', 'xml', 'html', or 'text'
 				    async: true,
 				    success: function(response) {	
-				    	console.log(response.objects[0]);
-				    	//APP.game = response.objects;
-				    	
-				    	//console.log("game:", APP.game);
-				    	
+				    	//console.log(response.objects[0]);
 				    	Transparency.render(qwery('[data-list=game]')[0], response.objects, APP.directives);
 						Transparency.render(qwery('[data-list=headerGame]')[0], response.objects[0], APP.directives);
 						APP.router.change();//ga naar deze methode.
@@ -222,18 +218,12 @@ var APP = APP || {};// Namespace object
 				    dataType: 'json', //'json', 'xml', 'html', or 'text'
 				    async: true,
 				    success: function(response) {	
-				
-				    	//APP.game = response;
-				    	
-				    	//console.log("gameinfo:", APP.game)
 
 				    	Transparency.render(qwery('[data-route=updateGame]')[0], response, APP.directives);
 
 				    	var section = qwery('[data-route=updateGame]')[0];
 				    	var gameSection = qwery('[data-route=game]')[0];
-
 				    	section.classList.add('active');
-
 				    	gameSection.classList.remove('active');
 				    	APP.loader.stop();
 
@@ -251,10 +241,7 @@ var APP = APP || {};// Namespace object
 				    async: true,
 				    success: function(response) {	
 
-				    	console.log(response.objects[0]);
-				    	//APP.game = response.objects[0].standings;
-				    	
-				    	//console.log("game:", APP.game);
+				    	//console.log(response.objects[0]);
 				    	Transparency.render(qwery('[data-list=headerRanking]')[0], response.objects[0], APP.directives);
 				    	Transparency.render(qwery('[data-list=ranking]')[0], response.objects[0].standings, APP.directives);
 						APP.router.change();//ga naar deze methode.
